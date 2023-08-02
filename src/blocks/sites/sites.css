@@ -1,0 +1,11 @@
+.sites {
+  width: 68.75%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 17px;
+}
+@media screen and (max-width: 1279px) {
+  .sites {
+    width: 88.12%;
+  }
+}

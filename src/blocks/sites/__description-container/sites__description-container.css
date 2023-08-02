@@ -1,0 +1,9 @@
+.sites__description-container{
+  background-color: white;
+  color: black;
+  height: 79px;
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}

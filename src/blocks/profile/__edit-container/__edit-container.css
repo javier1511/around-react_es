@@ -1,0 +1,19 @@
+.profile__edit-container {
+  width: 100%;
+  height: 39px;
+  display: flex;
+  margin: 0;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  padding-left: 15px;
+}
+
+
+@media screen and (max-width: 1279px) {
+  .profile__edit-container {
+    width: 88.12%;
+    padding: 0;
+    padding-left: 38px;
+    padding-top: 26.25px;
+  }
+}

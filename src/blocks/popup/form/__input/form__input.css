@@ -1,0 +1,21 @@
+.form__input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #cccccc;
+  padding-bottom: 13px;
+  outline: none;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+@media screen and (max-width: 1279px) {
+  .form__input {
+    width: 238px;
+    top: -40px;
+    right: -40px;
+    padding-bottom: 9px;
+
+  }
+}

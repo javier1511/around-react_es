@@ -1,0 +1,20 @@
+.modal__close-button{
+  position: absolute;
+  top: 50px;
+  right: 190px;
+ cursor: pointer;
+}
+.modal__close-button:hover{
+  opacity: 0.4;
+  transition: opacity 0.5s linear;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1279px) {
+  .modal__close-button {
+    position: absolute;
+    top: 261px;
+    right: 8px;
+    cursor: pointer;
+  }
+}

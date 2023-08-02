@@ -1,0 +1,14 @@
+.profile__job-container {
+  height: auto;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  padding-left: 15px;
+  margin: 0;
+}
+@media screen and (max-width: 1279px) {
+  .profile__job-container {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+  }
+}

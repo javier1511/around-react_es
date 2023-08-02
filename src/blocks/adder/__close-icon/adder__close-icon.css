@@ -1,0 +1,20 @@
+.adder__close-icon {
+  width: 40px;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+@media screen and (max-width: 1279px) {
+  .adder__close-icon {
+    width: 26px;
+    top: -50px;
+    right: -40px;
+    left: 255px;
+    margin: 0;
+  }
+}
+.adder__close-icon:hover {
+  opacity: 0.6;
+}

@@ -1,0 +1,17 @@
+.profile {
+  width: 68.75%;
+  padding-bottom: 50px;
+  padding-top: 40px;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  grid-template-rows: 1fr auto;
+
+}
+@media screen and (max-width: 1279px) {
+  .profile {
+    width: 282px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

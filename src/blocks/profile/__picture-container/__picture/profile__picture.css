@@ -1,0 +1,11 @@
+.profile__picture {
+  max-width: 168.75px;
+  height: 120px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+  width: 120px;
+}
+
+
+

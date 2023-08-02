@@ -1,0 +1,13 @@
+.sites__description-icon {
+  width: 21px;
+  height: 19px;
+  cursor: pointer;
+}
+
+.sites__description-icon-active {
+  background-image: url(../../../../images/Heart-active.svg);
+  opacity: 1;
+}
+.sites__description-icon:hover {
+  opacity: 0.4;
+}

@@ -1,0 +1,22 @@
+.sites__trash-icon{
+  position: absolute;
+  cursor: pointer;
+  width: 18px;
+  height: 19.3px;
+  z-index: 5;
+  right: 0;
+  }
+  @media screen and (max-width: 1279px) {
+    .sites__trash-icon {
+      position: absolute;
+      cursor: pointer;
+      width: 18px;
+      height: 19.3px;
+      z-index: 5;
+      right: 0px;
+      left: 243px;
+    }
+  }
+  .sites__trash-icon:hover {
+    opacity: 0.6;
+  }
