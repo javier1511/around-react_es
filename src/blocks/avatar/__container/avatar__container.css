@@ -5,3 +5,11 @@
     border-radius: 10px;
     position: relative;
 }
+
+@media screen and (max-width: 1279px) {
+    .avatar__container {
+      width: 238px;
+      height: 322px;
+      padding: 0px 22px 0px 22px;
+    }
+  }

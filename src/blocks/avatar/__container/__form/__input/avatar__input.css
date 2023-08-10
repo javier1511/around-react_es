@@ -10,3 +10,14 @@
     font-size: 14px;
     line-height: 17px;
 }
+
+
+@media screen and (max-width: 1279px) {
+    .avatar__input {
+      width: 238px;
+      top: -40px;
+      right: -40px;
+      padding-bottom: 9px;
+  
+    }
+  }

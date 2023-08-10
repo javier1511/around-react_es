@@ -1,17 +1,30 @@
-import React from "react";
-import profileAvatar from "../images/profile-avatar-min.jpg";
-import closeIcon from "../images/Close-Icon-min.png";
-import trash from "../images/trash.png";
-import heart from "../images/heart-min.svg";
+import { useEffect, useState } from "react";
 import PopupWithForm from "./PopupWithForm.jsx";
+import "../index.css";
+import api from "../utils/api.js";
+import Card from "./Card.jsx";
+
+import ImagePopup from "./ImagePopup.jsx";
 
 const Main = (props) => {
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
-    React.useState(false);
+  const [userName, setUserName] = useState("");
+  const [userDescription, setUserDescription] = useState("");
+  const [userAvatar, setUserAvatar] = useState("");
+  const [cards, setCards] = useState([]);
 
-  function handleEditProfileClick() {
-    setIsEditAvatarPopupOpen(true);
-  }
+  useEffect(() => {
+    api.getUserProfile().then((res) => {
+      setUserName(res.name);
+      setUserAvatar(res.avatar);
+      setUserDescription(res.about);
+    });
+  }, []);
+
+  useEffect(() => {
+    api.getCards().then((response) => {
+      setCards(response);
+    });
+  }, []);
 
   return (
     <>
@@ -19,97 +32,128 @@ const Main = (props) => {
         <div className="separator"></div>
         <div className="profile">
           <div className="profile__picture-container">
-            <button className="profile__picture-overlay"></button>
+            <button
+              onClick={props.oneEditAvatarClick}
+              className="profile__picture-overlay"
+            ></button>
             <img
-              src={profileAvatar}
+              src={userAvatar}
               alt="imagen-de-perfil"
               className="profile__picture"
             />
           </div>
           <div className="profile__edit-container">
-            <h4 className="profile__title">Jacques Cousteau</h4>
-            <button type="button" className="profile__edit-button"></button>
+            <h4 className="profile__title">{userName}</h4>
+            <button
+              onClick={props.oneEditProfileClick}
+              type="button"
+              className="profile__edit-button"
+            ></button>
           </div>
           <div className="profile__job-container">
-            <p className="profile__subtitle">Explorador</p>
+            <p className="profile__subtitle">{userDescription}</p>
           </div>
           <div className="profile__plus-container">
             <button
-              onClick={()=>{handleEditProfileClick()}}
+              onClick={props.oneAddPlaceClick}
               type="button"
               className="profile__plus-button"
             ></button>
           </div>
         </div>
-        <PopupWithForm open={isEditAvatarPopupOpen} />
+        <PopupWithForm
+          isOpen={props.isEditAvatarPopupOpen}
+          title="Cambiar foto de perfil"
+          submitText="Guardar"
+          onClose={props.closeAllPopups}
+          formClassName="avatar__form"
+          popupContainerClassName="avatar__container"
+        >
+          <input
+            type="url"
+            name="profile"
+            className="avatar__input"
+            id="profile-url"
+            placeholder="Enlace de imagen"
+            required
+            maxLength="40"
+          />
+        </PopupWithForm>
+        <PopupWithForm
+          isOpen={props.isEditProfilePopupOpen}
+          title="Editar Perfil"
+          submitText="Guardar"
+          onClose={props.closeAllPopups}
+          formClassName="form"
+          popupContainerClassName="popup__container"
+        >
+          <input
+            type="text"
+            name="name"
+            className="form__input"
+            id="name"
+            required
+            minLength="2"
+            maxLength="40"
+          />
+          <span className="form__error-message" id="name-error"></span>
+          <input
+            type="text"
+            name="job"
+            className="form__input"
+            id="job"
+            required
+            minLength="2"
+            maxLength="200"
+          />
+          <span className="form__error-message" id="job-error"></span>
+        </PopupWithForm>
+        <PopupWithForm
+          isOpen={props.isAddPlacePopupOpen}
+          title="Nuevo lugar"
+          submitText="Crear"
+          onClose={props.closeAllPopups}
+          formClassName="form"
+          popupContainerClassName="popup__container"
+        >
+          <input
+            type="text"
+            name="name"
+            className="form__input"
+            id="title"
+            placeholder="Titulo"
+            required
+            minLength="2"
+            maxLength="30"
+          />
+          <input
+            type="url"
+            name="job"
+            className="form__input"
+            id="url"
+            placeholder="Enlace de imagen"
+            required
+          />
+        </PopupWithForm>
+        <ImagePopup
+          isOpen={props.isImageOpen}
+          onClose={props.closeAllPopups}
+          selectedCard={props.selectedCard}
+        />
 
-        <div className="confirmation">
-          <div className="confirmation__container">
-            <img
-              className="confirmation__close"
-              src="../images/Close-Icon-min.png"
-              alt="closeIcon"
-            />
-            <form className="confirmation__form">
-              <p className="confirmation__text">¿Estás seguro/a?</p>
-              <button className="confirmation__button">Sí</button>
-            </form>
-          </div>
-        </div>
-
-        <div className="avatar">
-          <div className="avatar__container">
-            <img src={closeIcon} alt="cerrar-icono" className="avatar__close" />
-            <form className="avatar__form" noValidate>
-              <h2 className="avatar__text">Cambiar foto de perfil</h2>
-              <input
-                type="url"
-                name="profile"
-                className="avatar__input"
-                id="profile-url"
-                placeholder="Enlace de imagen"
-                required
-              />
-              <button id="save__profile" className="avatar__button">
-                Guardar
-              </button>
-            </form>
-          </div>
-        </div>
-
-        <div className="overlay"></div>
         <div className="sites">
-          <template className="template">
-            <div className="cards__container">
-              <div className="sites__picture-container">
-                <img
-                  src={trash}
-                  alt="yosemite-imagen-vista"
-                  className="sites__trash-icon"
-                />
-                <img src=" " alt="" className="sites__picture" />
-              </div>
-              <div className="sites__description-container">
-                <p className="sites__description-text">Valle de Yosemite</p>
-                <div className="like__container">
-                  <img
-                    src={heart}
-                    alt="me-gusta-imagen"
-                    className="sites__description-icon"
-                  />
-                  <span className="sites__description-counter"></span>
-                </div>
-              </div>
-            </div>
-          </template>
-        </div>
-
-        <div className="modal">
-          <img src={closeIcon} alt="" className="modal__close-button" />
-          <div className="modal__container">
-            <img src=" " alt="" className="modal__picture" />
-            <span className="modal__text-subtitle"></span>
-          </div>
+          {cards.map((card) => {
+            return (
+              <Card
+                name={card.name}
+                link={card.link}
+                key={card._id}
+                likes={card.likes.length}
+                onOpenImage={props.onOpenImage}
+              />
+            );
+          })}
+          <Card />
         </div>
       </main>
     </>
