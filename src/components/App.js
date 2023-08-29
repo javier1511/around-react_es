@@ -4,6 +4,8 @@ import Header from './Header.jsx';
 
 import React, { useState } from "react";
 import api from '../utils/api.js';
+import CurrentUserContext from '../contexts/CurrentUserContext';
+import DeleteCardPopup from './DeleteCardPopup';
 
 
 
@@ -16,15 +18,25 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] =useState(false);
   const [isImageOpen, setIsImageOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState("")
+  const [currentUser, setCurrentUser] =useState("")
+  const [cards, setCards] = useState([]);
+  const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen]= useState(false);
+  
 
   function handleImageOpenClick (card) {
-    setIsImageOpen(true);
     setSelectedCard(card)
+    setIsImageOpen(true);
+  
   }
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true)
     
+  }
+
+  function handleDeleteCardPopup (card){
+    setSelectedCard(card)
+    setIsDeleteCardPopupOpen(true);
   }
 
   function handleAddNewPlace() {
@@ -41,13 +53,37 @@ function App() {
     setIsAddPlacePopupOpen(false)
     setIsEditProfilePopupOpen(false)
     setIsImageOpen(false)
+    setIsDeleteCardPopupOpen(false)
+    
   }
+  React.useEffect(() => {
+    api.getUserProfile().then((data) => {
+      setCurrentUser(data);
+    });
+  }, []);
+  React.useEffect(() => {
+    api.getCards().then((data) => {
+      setCards(data);
+    });
+  }, []);
 
-
+  const handleRemoveCard = (cardId) => {
+    console.log(cardId); // Verificar si cardId se pasa correctamente
+    api.removeCardFromApi(cardId, () => 
+      setCards((state) => state.filter((i) => i._id !== cardId))
+    );
+  };
+  
   return (
-    <div className="App">
+
+    
+   
+<CurrentUserContext.Provider value={currentUser}>
+  <div className='page'>
+
     <Header/>
-      <Main
+
+  <Main 
           isEditAvatarPopupOpen={isEditAvatarPopupOpen}
           isAddPlacePopupOpen={isAddPlacePopupOpen}
           isEditProfilePopupOpen={isEditProfilePopupOpen}
@@ -58,9 +94,26 @@ function App() {
       isImageOpen={isImageOpen}
       onOpenImage={handleImageOpenClick}
       selectedCard={selectedCard}
+      cards={cards}
+      onDeleteCardClick={handleDeleteCardPopup}
+    
+      />
+
+      <DeleteCardPopup 
+      isOpen={isDeleteCardPopupOpen}
+      onClose={closeAllPopups}
+      selectedCard={selectedCard}
+      onDeleteCard={handleRemoveCard}
+      
       
       
       />
+
+ 
+      
+           
+
+    
   
       
         
@@ -68,8 +121,21 @@ function App() {
         <footer className="footer">
           <p className="footer__copyright">© 2021 Alrededor de los EEUU</p>
         </footer>
+
+
+  </div>
+
+  
+
+
+
+      
+
+
+</CurrentUserContext.Provider>
+  
  
-    </div>
+   
   );
 }
 

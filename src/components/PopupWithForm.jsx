@@ -10,13 +10,14 @@ return (
         className="popup__close-icon"
         src={closeIcon}
         onClick={props.onClose}/>
-        <form className={props.formClassName} noValidate>
+        <form className={props.formClassName} noValidate onSubmit={props.onSubmit} >
         <h2 className="form__title">{props.title}</h2>
         {props.children}
 
         <button
+            
             id="save__button"
-            className="form__button form__submit-inactive" >
+            className="form__button form__submit-inactive"  >
             {props.submitText}
         </button>
         </form>

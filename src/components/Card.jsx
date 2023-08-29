@@ -1,20 +1,38 @@
 import React from "react";
-
+import CurrentUserContext from "../contexts/CurrentUserContext";
 import trashButton from "../images/Trash.svg";
 import heartImage from "../images/heart-min.svg";
 
 const Card = (props) => {
+
+
+
   function handleCardClick() {
     props.onOpenImage(props);
   }
+
+  function handleDeleteCardPopupForm () {
+    props.onDeleteCardClick(props)
+  }
+
+  const currentUser= React.useContext(CurrentUserContext);
+
+  const isOwn = props.card?.owner?._id === currentUser._id;
+
+  const sitesTrashIcon = (
+    `sites__trash-icon ${isOwn ? 'sites__trash-icon_visible' : 'sites__icon-icon_hidden'}`
+  );
+
+
   return (
     <>
       <div className="cards__container">
         <div className="sites__picture-container">
           <img
+            onClick={handleDeleteCardPopupForm}
             src={trashButton}
             alt="yosemite-imagen-vista"
-            className="sites__trash-icon"
+            className={sitesTrashIcon}
           />
           <img
             src={props.link}

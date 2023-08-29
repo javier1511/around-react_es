@@ -1,30 +1,20 @@
-import { useEffect, useState } from "react";
+import React from "react";
 import PopupWithForm from "./PopupWithForm.jsx";
 import "../index.css";
-import api from "../utils/api.js";
+import CurrentUserContext from "../contexts/CurrentUserContext.js";
 import Card from "./Card.jsx";
 
 import ImagePopup from "./ImagePopup.jsx";
 
 const Main = (props) => {
-  const [userName, setUserName] = useState("");
-  const [userDescription, setUserDescription] = useState("");
-  const [userAvatar, setUserAvatar] = useState("");
-  const [cards, setCards] = useState([]);
 
-  useEffect(() => {
-    api.getUserProfile().then((res) => {
-      setUserName(res.name);
-      setUserAvatar(res.avatar);
-      setUserDescription(res.about);
-    });
-  }, []);
+  
 
-  useEffect(() => {
-    api.getCards().then((response) => {
-      setCards(response);
-    });
-  }, []);
+ 
+ 
+  
+  const currentUser = React.useContext(CurrentUserContext);
+
 
   return (
     <>
@@ -37,13 +27,13 @@ const Main = (props) => {
               className="profile__picture-overlay"
             ></button>
             <img
-              src={userAvatar}
+              src={currentUser.avatar}
               alt="imagen-de-perfil"
               className="profile__picture"
             />
           </div>
           <div className="profile__edit-container">
-            <h4 className="profile__title">{userName}</h4>
+            <h4 className="profile__title">{currentUser.name}</h4>
             <button
               onClick={props.oneEditProfileClick}
               type="button"
@@ -51,7 +41,7 @@ const Main = (props) => {
             ></button>
           </div>
           <div className="profile__job-container">
-            <p className="profile__subtitle">{userDescription}</p>
+            <p className="profile__subtitle">{currentUser.about}</p>
           </div>
           <div className="profile__plus-container">
             <button
@@ -142,18 +132,23 @@ const Main = (props) => {
         />
 
         <div className="sites">
-          {cards.map((card) => {
+          {props.cards.map((card) => {
             return (
               <Card
-                name={card.name}
-                link={card.link}
-                key={card._id}
-                likes={card.likes.length}
-                onOpenImage={props.onOpenImage}
+                card={card}
+              name={card.name}
+              link={card.link}
+              key={card._id}
+              owner={card.owner}
+              likes={card.likes.length}
+              onOpenImage={props.onOpenImage}
+              onDeleteCardClick={props.onDeleteCardClick}
+             
+               
               />
             );
           })}
-          <Card />
+       
         </div>
       </main>
     </>
