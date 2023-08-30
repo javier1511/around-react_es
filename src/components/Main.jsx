@@ -3,6 +3,7 @@ import PopupWithForm from "./PopupWithForm.jsx";
 import "../index.css";
 import CurrentUserContext from "../contexts/CurrentUserContext.js";
 import Card from "./Card.jsx";
+import DeleteCardPopup from "./DeleteCardPopup.jsx";
 
 import ImagePopup from "./ImagePopup.jsx";
 
@@ -132,24 +133,24 @@ const Main = (props) => {
         />
 
         <div className="sites">
-          {props.cards.map((card) => {
-            return (
-              <Card
-                card={card}
-              name={card.name}
-              link={card.link}
-              key={card._id}
-              owner={card.owner}
-              likes={card.likes.length}
-              onOpenImage={props.onOpenImage}
-              onDeleteCardClick={props.onDeleteCardClick}
-             
-               
-              />
-            );
-          })}
+        {props.cards.map((card) => {
+  return (
+    <Card
+      card={card} // Pasa la tarjeta completa
+      name={card.name}
+      link={card.link}
+      key={card._id}
+      owner={card.owner}
+      likes={card.likes.length}
+      onOpenImage={props.onOpenImage}
+      onDeleteCardClick={props.onDeleteCardClick}
+    />
+  );
+})}
+
        
         </div>
+       
       </main>
     </>
   );

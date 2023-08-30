@@ -8,12 +8,13 @@ const Card = (props) => {
 
 
   function handleCardClick() {
-    props.onOpenImage(props);
+    props.onOpenImage(props.card);
   }
 
-  function handleDeleteCardPopupForm () {
-    props.onDeleteCardClick(props)
+  function handleDeleteCardPopupForm() {
+    props.onDeleteCardClick(props.card);
   }
+  
 
   const currentUser= React.useContext(CurrentUserContext);
 
@@ -29,7 +30,8 @@ const Card = (props) => {
       <div className="cards__container">
         <div className="sites__picture-container">
           <img
-            onClick={handleDeleteCardPopupForm}
+            onClick={() => handleDeleteCardPopupForm(props.card)}
+
             src={trashButton}
             alt="yosemite-imagen-vista"
             className={sitesTrashIcon}

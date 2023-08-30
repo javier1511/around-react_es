@@ -45,25 +45,18 @@ class Api {
         console.log(err);
       }
     }
-  
     async removeCardFromApi(cardId, onDeleteCard) {
       try {
-        const response = await fetch(`https://around.nomoreparties.co/v1/web_es_05/cards/${cardId}`, {
-          method: "DELETE",
-          headers: {
-            authorization: this.authorization,
-            'Content-Type': 'application/json'
-          }
-        });
-        if (response.ok) {
-          onDeleteCard(); // Llamar a la función onDeleteCard después de eliminar la tarjeta exitosamente
-        } else {
-          return Promise.reject(`Error: ${response.status}`);
-        }
+        console.log("Removing card with ID:", cardId); // Verificar el cardId
+        const deletedCard = await this._useFetch(`https://around.nomoreparties.co/v1/web_es_05/cards/${cardId}`, "DELETE");
+        onDeleteCard(cardId); // Call the provided callback function with the deleted card's ID
+        return deletedCard; // You might choose to return deletedCard or any other relevant information
       } catch (err) {
         throw new Error(err);
       }
     }
+    
+    
     
   
     async addLike(cardId) {
