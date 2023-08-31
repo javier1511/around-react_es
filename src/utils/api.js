@@ -89,27 +89,31 @@ class Api {
       }
     }
   
-    async patchUserProfile(name, about, avatar) {
-      try {
-        const res = await this._useFetch("https://around.nomoreparties.co/v1/web_es_05/users/me", "PATCH", {
-          name,
-          about,
-          avatar
-        }, {
-          "Content-Type": "application/json"
-        });
-        console.log(res);
-        return res;
-      } catch (err) {
-        console.log(err);
-      }
-    }
-      async changeAvatarProfile(avatar) {
+  async patchUserProfile(name, about, avatar, onUpdateUser) {
+  try {
+    const res = await this._useFetch("https://around.nomoreparties.co/v1/web_es_05/users/me", "PATCH", {
+      name,
+      about,
+      avatar
+    }, {
+      "Content-Type": "application/json"
+    });
+
+    // After updating the user profile, call the provided onUpdateUser callback
+    onUpdateUser(res);
+
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+      async changeAvatarProfile(link) {
         try {
           const res = await this._useFetch("https://around.nomoreparties.co/v1/web_es_05/users/me/avatar", "PATCH", {
-            avatar
+            avatar:link
           });
-          console.log(res);
+          
           return res;
         } catch (err) {
           console.log(err);

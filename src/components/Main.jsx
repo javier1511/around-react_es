@@ -3,7 +3,6 @@ import PopupWithForm from "./PopupWithForm.jsx";
 import "../index.css";
 import CurrentUserContext from "../contexts/CurrentUserContext.js";
 import Card from "./Card.jsx";
-import DeleteCardPopup from "./DeleteCardPopup.jsx";
 
 import ImagePopup from "./ImagePopup.jsx";
 
@@ -70,35 +69,7 @@ const Main = (props) => {
             maxLength="40"
           />
         </PopupWithForm>
-        <PopupWithForm
-          isOpen={props.isEditProfilePopupOpen}
-          title="Editar Perfil"
-          submitText="Guardar"
-          onClose={props.closeAllPopups}
-          formClassName="form"
-          popupContainerClassName="popup__container"
-        >
-          <input
-            type="text"
-            name="name"
-            className="form__input"
-            id="name"
-            required
-            minLength="2"
-            maxLength="40"
-          />
-          <span className="form__error-message" id="name-error"></span>
-          <input
-            type="text"
-            name="job"
-            className="form__input"
-            id="job"
-            required
-            minLength="2"
-            maxLength="200"
-          />
-          <span className="form__error-message" id="job-error"></span>
-        </PopupWithForm>
+        
         <PopupWithForm
           isOpen={props.isAddPlacePopupOpen}
           title="Nuevo lugar"
@@ -144,6 +115,7 @@ const Main = (props) => {
       likes={card.likes.length}
       onOpenImage={props.onOpenImage}
       onDeleteCardClick={props.onDeleteCardClick}
+      onCardLike={props.onCardLike}
     />
   );
 })}

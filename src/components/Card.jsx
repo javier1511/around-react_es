@@ -5,7 +5,9 @@ import heartImage from "../images/heart-min.svg";
 
 const Card = (props) => {
 
-
+  const handleLikeClick = () => {
+    props.onCardLike(props.card)
+  }
 
   function handleCardClick() {
     props.onOpenImage(props.card);
@@ -24,6 +26,12 @@ const Card = (props) => {
     `sites__trash-icon ${isOwn ? 'sites__trash-icon_visible' : 'sites__icon-icon_hidden'}`
   );
 
+
+const isLiked = props.card.likes.some(i => i._id === currentUser._id);
+
+
+
+const sitesDescriptionIcon = `sites__description-icon ${isLiked ? "sites__description-icon-active" : ""}`;
 
   return (
     <>
@@ -49,7 +57,8 @@ const Card = (props) => {
             <img
               src={heartImage}
               alt="me-gusta-imagen"
-              className="sites__description-icon"
+              className={sitesDescriptionIcon}
+              onClick={handleLikeClick}
             />
             <span className="sites__description-counter">{props.likes}</span>
           </div>
