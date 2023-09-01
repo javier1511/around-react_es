@@ -89,6 +89,7 @@ class Api {
       }
     }
   
+  
     async getUserProfile() {
       try {
         const res = await this._useFetch("https://around.nomoreparties.co/v1/web_es_05/users/me", "GET");

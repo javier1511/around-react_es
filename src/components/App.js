@@ -69,13 +69,28 @@ function App() {
   };
 
   const handleCardLike = (card) => {
-    const isLiked = card.likes.some((like) => like._id === currentUser._id);
-    api.addLike(card._id, isLiked).then((newCard) => {
-      setCards((state) =>
-        state.map((i) => (i._id === card._id ? newCard : i))
-      );
-    });
+    try {
+      const isLiked = card.likes.some((like) => like._id === currentUser._id);
+  
+      if (isLiked) {
+        api.removeLike(card._id).then((newCard) => {
+          setCards((state) =>
+            state.map((i) => (i._id === card._id ? newCard : i))
+          );
+        });
+      } else {
+        api.addLike(card._id).then((newCard) => {
+          setCards((state) =>
+            state.map((i) => (i._id === card._id ? newCard : i))
+          );
+        });
+      }
+    } catch (error) {
+      console.error("Error in handleCardLike:", error);
+    }
   };
+  
+  
 
   const handleEditProfile = ({ name, about, avatar }) => {
     api.patchUserProfile(name, about, avatar, (updatedProfile) => {

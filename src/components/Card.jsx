@@ -6,8 +6,13 @@ import heartImage from "../images/heart-min.svg";
 const Card = (props) => {
 
   const handleLikeClick = () => {
-    props.onCardLike(props.card)
+    if (props.onCardLike && props.card) {
+      props.onCardLike(props.card);
+    } else {
+      console.error("props.onCardLike or props.card is not defined.");
+    }
   }
+  
 
   function handleCardClick() {
     props.onOpenImage(props.card);
