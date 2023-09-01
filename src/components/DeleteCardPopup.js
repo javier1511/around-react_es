@@ -4,7 +4,6 @@ import PopupWithForm from "./PopupWithForm";
 const DeleteCardPopup = (props) => {
 
   const handleSubmitDeleteCard = (e) => {
-    console.log("Selected card:", props.selectedCard); // Verificar si selectedCard se pasa correctamente
     e.preventDefault();
     props.onDeleteCard(props.selectedCard._id);
     props.onClose();

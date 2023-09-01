@@ -27,13 +27,13 @@ const Main = (props) => {
               className="profile__picture-overlay"
             ></button>
             <img
-              src={currentUser.avatar}
+              src={currentUser && currentUser.avatar}
               alt="imagen-de-perfil"
               className="profile__picture"
             />
           </div>
           <div className="profile__edit-container">
-            <h4 className="profile__title">{currentUser.name}</h4>
+            <h4 className="profile__title">{currentUser && currentUser.name}</h4>
             <button
               onClick={props.oneEditProfileClick}
               type="button"
@@ -41,7 +41,7 @@ const Main = (props) => {
             ></button>
           </div>
           <div className="profile__job-container">
-            <p className="profile__subtitle">{currentUser.about}</p>
+            <p className="profile__subtitle">{currentUser && currentUser.about}</p>
           </div>
           <div className="profile__plus-container">
             <button

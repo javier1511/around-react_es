@@ -14,7 +14,6 @@ const AddPlacePopup = (props) => { // Cambio "addPlacePopup" por "AddPlacePopup"
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('onAddPlaceSubmit:', props.onAddPlaceSubmit); // Check the value
     props.onAddPlaceSubmit({
       name,
       link,

@@ -7,6 +7,7 @@ return (
     <div className={`popup ${props.isOpen ? "popup__opened" : " "}`}>
     <div className={props.popupContainerClassName}>
         <img
+        alt="closeButton"
         className="popup__close-icon"
         src={closeIcon}
         onClick={props.onClose}/>

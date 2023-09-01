@@ -23,7 +23,6 @@ class Api {
     async getCards() {
       try {
         const res = await this._useFetch("https://around.nomoreparties.co/v1/web_es_05/cards", "GET");
-        console.log(res);
         return res;
       } catch (err) {
         console.log(err);
@@ -40,10 +39,6 @@ class Api {
             'Content-Type': 'application/json'
           }
         );
-    
-        console.log(newCard);
-    
-        // Agregar la respuesta a onAddPlaceSubmit
         if (typeof onAddPlaceSubmit === 'function') {
           onAddPlaceSubmit(newCard);
         }
@@ -57,7 +52,6 @@ class Api {
     
     async removeCardFromApi(cardId, onDeleteCard) {
       try {
-        console.log("Removing card with ID:", cardId); // Verificar el cardId
         const deletedCard = await this._useFetch(`https://around.nomoreparties.co/v1/web_es_05/cards/${cardId}`, "DELETE");
         onDeleteCard(cardId); // Call the provided callback function with the deleted card's ID
         return deletedCard; // You might choose to return deletedCard or any other relevant information
@@ -81,7 +75,6 @@ class Api {
     async removeLike(cardId) {
       try {
         const removeLike = await this._useFetch(`https://around.nomoreparties.co/v1/web_es_05/cards/likes/${cardId}`, "DELETE"); {
-          console.log(removeLike);
           return removeLike;
         }
       } catch (err) {
@@ -93,7 +86,6 @@ class Api {
     async getUserProfile() {
       try {
         const res = await this._useFetch("https://around.nomoreparties.co/v1/web_es_05/users/me", "GET");
-        console.log("🚀 ~ file: Api.js:74 ~ Api ~ getUserProfile ~ res:", res)
         return res;
       } catch (err) {
         console.log(err);

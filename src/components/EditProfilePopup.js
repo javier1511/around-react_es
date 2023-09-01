@@ -64,7 +64,7 @@ const EditProfilePopup = (props) => {
             minLength="2"
             maxLength="200"
             value={description || ""}
-            onChange={handleChangeDescription}s
+            onChange={handleChangeDescription}
           />
           <span className="form__error-message" id="job-error"></span>
         </PopupWithForm>
