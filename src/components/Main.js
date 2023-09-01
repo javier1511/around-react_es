@@ -1,10 +1,10 @@
 import React from "react";
-import PopupWithForm from "./PopupWithForm.jsx";
+
 import "../index.css";
 import CurrentUserContext from "../contexts/CurrentUserContext.js";
-import Card from "./Card.jsx";
+import Card from "./Card.js";
 
-import ImagePopup from "./ImagePopup.jsx";
+import ImagePopup from "./ImagePopup.js";
 
 const Main = (props) => {
 
@@ -53,33 +53,7 @@ const Main = (props) => {
         </div>
   
         
-        <PopupWithForm
-          isOpen={props.isAddPlacePopupOpen}
-          title="Nuevo lugar"
-          submitText="Crear"
-          onClose={props.closeAllPopups}
-          formClassName="form"
-          popupContainerClassName="popup__container"
-        >
-          <input
-            type="text"
-            name="name"
-            className="form__input"
-            id="title"
-            placeholder="Titulo"
-            required
-            minLength="2"
-            maxLength="30"
-          />
-          <input
-            type="url"
-            name="job"
-            className="form__input"
-            id="url"
-            placeholder="Enlace de imagen"
-            required
-          />
-        </PopupWithForm>
+   
         <ImagePopup
           isOpen={props.isImageOpen}
           onClose={props.closeAllPopups}
