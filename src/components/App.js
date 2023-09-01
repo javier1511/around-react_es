@@ -8,6 +8,7 @@ import CurrentUserContext from '../contexts/CurrentUserContext';
 import DeleteCardPopup from './DeleteCardPopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
+import Footer from './Footer';
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -153,9 +154,7 @@ function App() {
 
         />
 
-        <footer className="footer">
-          <p className="footer__copyright">© 2021 Alrededor de los EEUU</p>
-        </footer>
+        <Footer />
       </div>
     </CurrentUserContext.Provider>
   );
