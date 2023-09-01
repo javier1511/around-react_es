@@ -51,24 +51,7 @@ const Main = (props) => {
             ></button>
           </div>
         </div>
-        <PopupWithForm
-          isOpen={props.isEditAvatarPopupOpen}
-          title="Cambiar foto de perfil"
-          submitText="Guardar"
-          onClose={props.closeAllPopups}
-          formClassName="avatar__form"
-          popupContainerClassName="avatar__container"
-        >
-          <input
-            type="url"
-            name="profile"
-            className="avatar__input"
-            id="profile-url"
-            placeholder="Enlace de imagen"
-            required
-            maxLength="40"
-          />
-        </PopupWithForm>
+  
         
         <PopupWithForm
           isOpen={props.isAddPlacePopupOpen}

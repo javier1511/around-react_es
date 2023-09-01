@@ -30,21 +30,31 @@ class Api {
       }
     }
   
-    async addNewCardFromApi(name, link) {
+    async addNewCardFromApi(cardData, onAddPlaceSubmit) {
       try {
-        const newCard = await this._useFetch("https://around.nomoreparties.co/v1/web_es_05/cards", "POST", {
-          name: name,
-          link: link,
-        }, 
-        {
-          'Content-Type': 'application/json'
-        });
-        console.log(newCard); // Agregado console.log para validar la respuesta
+        const newCard = await this._useFetch(
+          "https://around.nomoreparties.co/v1/web_es_05/cards",
+          "POST",
+          cardData, // Pass the whole cardData object
+          {
+            'Content-Type': 'application/json'
+          }
+        );
+    
+        console.log(newCard);
+    
+        // Agregar la respuesta a onAddPlaceSubmit
+        if (typeof onAddPlaceSubmit === 'function') {
+          onAddPlaceSubmit(newCard);
+        }
+    
         return newCard;
       } catch (err) {
         console.log(err);
       }
     }
+    
+    
     async removeCardFromApi(cardId, onDeleteCard) {
       try {
         console.log("Removing card with ID:", cardId); // Verificar el cardId

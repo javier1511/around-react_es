@@ -7,6 +7,7 @@ import api from '../utils/api.js';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import DeleteCardPopup from './DeleteCardPopup';
 import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -88,12 +89,18 @@ function App() {
     });
   };
 
+  const handleAddPlaceSubmit = ({name, link}) => {
+    api.addNewCardFromApi({name, link}).then((newPlace) => {
+      setCards([newPlace, ...cards]);
+    });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header />
         <Main
-          isAddPlacePopupOpen={isAddPlacePopupOpen}
+          
           oneEditProfileClick={handleEditProfileClick}
           oneAddPlaceClick={handleAddNewPlace}
           oneEditAvatarClick={handleEditAvatarPopupOpen}
@@ -123,6 +130,12 @@ function App() {
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
+        />
+        <AddPlacePopup
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
+        onAddPlaceSubmit={handleAddPlaceSubmit}
+
         />
 
         <footer className="footer">
