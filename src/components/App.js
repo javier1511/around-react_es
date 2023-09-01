@@ -64,7 +64,6 @@ function App() {
   }, []);
 
   const handleRemoveCard = (cardId) => {
-    console.log(cardId); // Verificar si cardId se pasa correctamente
     api.removeCardFromApi(cardId, () =>
       setCards((state) => state.filter((i) => i._id !== cardId))
     );
